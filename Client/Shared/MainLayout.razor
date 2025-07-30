@@ -1,0 +1,31 @@
+﻿@inherits LayoutComponentBase
+@inject NavigationManager Nav
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <header class="top-row">
+            <h5>Climate is what we expect, weather is what we get.</h5>
+            <div class="top-row px-4">
+                <button @onclick="LogOut" class="btn btn-danger">Log Out</button>
+            </div>
+        </header>
+        
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private async Task LogOut()
+    {
+        await LocalStorage.RemoveItemAsync("authToken");
+        Nav.NavigateTo("/", forceLoad: true);
+    }
+}

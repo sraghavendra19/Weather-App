@@ -1,0 +1,21 @@
+@page "/home"
+@inject NavigationManager Nav
+
+<ProtectedPage>
+    <div class="container text-center mt-5">
+        <div class="card shadow-lg p-5 bg-light rounded">
+            <h2 class="text-primary mb-3">🌤️ Welcome to WeatherApp</h2>
+
+            <p class="text-muted fs-5">
+               WeatherApp – your smart companion for staying ahead of the weather.
+                Easily discover real-time conditions in any city and personalize your experience by saving your favorite locations and weather preferences. 
+                Designed for clarity, speed, and convenience — weather tracking made effortless.
+            </p>
+
+            <div class="mt-4 d-flex justify-content-center gap-3 flex-wrap">
+                <button class="btn btn-success btn-lg" @onclick='() => Nav.NavigateTo("/weather")'>🌦 Check Weather</button>
+                <button class="btn btn-outline-primary btn-lg" @onclick='() => Nav.NavigateTo("/favlist")'>❤️ Favorites</button>
+            </div>
+        </div>
+    </div>
+</ProtectedPage>

@@ -1,0 +1,267 @@
+@page "/favlist"
+@using WeatherApp_API.Shared.Models
+@using WeatherApp_API.Client.Services
+
+@inject AuthService Auth
+@inject IJSRuntime JS
+@inject WeatherService WeatherService
+<ProtectedPage>
+<style>
+    body {
+        min-height: 100vh;
+        background-image: linear-gradient(to bottom, #b7f8db 0%, #50c9c3 100%);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: #ffffffcc;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3, h5 {
+        text-align: center;
+        color: #333;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 1.5rem;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 15px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    p.message {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 1.1em;
+        color: red;
+    }
+
+    .weather-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 1.5rem 0 1rem;
+        text-align: center;
+    }
+
+    .weather-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 30px;
+        background-color: #e0f7fa;
+        padding: 1.5rem;
+        border-radius: 10px;
+        max-width: 650px;
+        margin: 0 auto 2rem;
+        font-size: 15px;
+    }
+
+    .weather-grid p {
+        margin: 0;
+        color: #222;
+    }
+</style>
+
+<div class="container">
+    <h3>Favourite Weather Settings</h3>
+    <h5>Set your favorite city and weather condition to get personalized updates.</h5>
+
+    <div class="form-group">
+        <input @bind="favCity" placeholder="Enter your favourite city" />
+        <input @bind="favWeather" placeholder="Enter your favourite weather (e.g., Clear, Rain)" />
+    </div>
+
+    <div class="button-group">
+        <button class="btn btn-primary" @onclick="OnSearch">Search Weather</button>
+        <button class="btn btn-primary" @onclick="SavePreferences">Save Preferences</button>
+        <button class="btn btn-secondary" @onclick="ClearOrModify">Clear/Modify</button>
+    </div>
+
+    @if (!string.IsNullOrWhiteSpace(savedMessage))
+    {
+        <p class="message">@savedMessage</p>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(currentstatus))
+    {
+        <h6 class="text-center mt-3">@currentstatus</h6>
+    }
+
+    @if (invokestart == "Yes" && currentWeather != null)
+    {
+        <div class="weather-title">Current Weather - @currentWeather.Name</div>
+        <div class="weather-grid">
+            <p><strong>Temp:</strong> @(currentWeather.Main != null ? $"{currentWeather.Main.Temp} °C" : "")</p>
+            <p><strong>Feels Like:</strong> @(currentWeather.Main != null ? $"{currentWeather.Main.Feels_Like} °C" : "")</p>
+
+            <p><strong>Condition:</strong> @(currentWeather.Weather?.FirstOrDefault()?.Description ?? "")</p>
+            <p><strong>Humidity:</strong> @(currentWeather.Main != null ? $"{currentWeather.Main.Humidity}%" : "")</p>
+
+            <p><strong>Wind Speed:</strong> @($"{currentWeather.Wind?.Speed} m/s")</p>
+            <p><strong>Cloudiness:</strong> @($"{currentWeather.Clouds?.All}%")</p>
+
+            <p><strong>Sunrise:</strong> @(currentWeather.Sys?.Sunrise != null ? DateTimeOffset.FromUnixTimeSeconds(currentWeather.Sys.Sunrise.Value).ToLocalTime().DateTime.ToShortTimeString() : "")</p>
+            <p><strong>Sunset:</strong> @(currentWeather.Sys?.Sunset != null ? DateTimeOffset.FromUnixTimeSeconds(currentWeather.Sys.Sunset.Value).ToLocalTime().DateTime.ToShortTimeString() : "")</p>
+        </div>
+    }
+</div>
+
+@code {
+    private string favCity = "";
+    private string favWeather = "";
+    private string savedMessage = "";
+    private string currentstatus = "";
+    private string invokestart = "No";
+
+    private string? dbCity;
+    private string? dbWeather;
+
+    private WeatherResponse? currentWeather;
+
+    private List<string> matchingCities = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = await Auth.GetCurrentUserAsync();
+        dbCity = user?.FavoriteCity;
+        dbWeather = user?.FavoriteWeather;
+
+        favCity = dbCity ?? "";
+        favWeather = dbWeather ?? "";
+    }
+
+    private async Task SavePreferences()
+    {
+        if (!string.IsNullOrWhiteSpace(dbCity) || !string.IsNullOrWhiteSpace(dbWeather))
+        {
+            savedMessage = "Preferences already exist. Use Modify instead.";
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(favCity) || string.IsNullOrWhiteSpace(favWeather))
+        {
+            savedMessage = "Both fields are required.";
+            return;
+        }
+
+        var success = await Auth.SaveFavouriteAsync(favCity, favWeather);
+        savedMessage = success ? "Preferences saved successfully!" : "Failed to save preferences.";
+    }
+
+    private async Task ClearOrModify()
+    {
+        bool inputsEmpty = string.IsNullOrWhiteSpace(favCity) && string.IsNullOrWhiteSpace(favWeather);
+        bool inputsUnchanged = favCity == dbCity && favWeather == dbWeather;
+
+        if (inputsEmpty)
+        {
+            savedMessage = "Preferences required.";
+        }
+        else if (inputsUnchanged)
+        {
+            bool confirmed = await JS.InvokeAsync<bool>("confirmClear");
+            if (confirmed)
+            {
+                var success = await Auth.SaveFavouriteAsync(null, null);
+                if (success)
+                {
+                    favCity = "";
+                    favWeather = "";
+                    dbCity = null;
+                    dbWeather = null;
+                    savedMessage = "Preferences cleared.";
+                }
+                else
+                {
+                    savedMessage = "Failed to clear preferences.";
+                }
+            }
+            else
+            {
+                savedMessage = "Preferences retained.";
+            }
+        }
+        else
+        {
+            var success = await Auth.SaveFavouriteAsync(favCity, favWeather);
+            if (success)
+            {
+                dbCity = favCity;
+                dbWeather = favWeather;
+                savedMessage = "Preferences updated.";
+            }
+            else
+            {
+                savedMessage = "Failed to update preferences.";
+            }
+        }
+    }
+
+    private async Task OnSearch()
+    {
+        if (string.IsNullOrWhiteSpace(favCity) || string.IsNullOrWhiteSpace(favWeather))
+        {
+            savedMessage = "Both fields are required.";
+            return;
+        }
+        try
+        {
+            currentWeather = await WeatherService.GetLiveWeather(favCity);
+            if (currentWeather != null && currentWeather.Weather.Any(w => w.Description.Equals(favWeather, StringComparison.OrdinalIgnoreCase)))
+            {
+                savedMessage = $"Found weather: {currentWeather.Weather.FirstOrDefault()?.Description} in {favCity}.";
+                invokestart = "Yes";
+            }
+            else
+            {
+                currentstatus = $"No matching weather found for {favCity} with condition {favWeather}.";
+                invokestart = "Yes";
+            }
+        }
+        catch
+        {
+            savedMessage = "Error fetching weather data.";
+            currentWeather = null;
+        }
+    }
+}
+</ProtectedPage>

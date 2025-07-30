@@ -1,0 +1,35 @@
+L:\C#\Blazors\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.deps.json
+L:\C#\Blazors\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.dll
+L:\C#\Blazors\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.pdb
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.GeneratedMSBuildEditorConfig.editorconfig
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.AssemblyInfoInputs.cache
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.AssemblyInfo.cs
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.csproj.CoreCompileInputs.cache
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.dll
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\refint\WeatherApp_API.Shared.dll
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.pdb
+L:\C#\Blazors\WeatherApp_API\Shared\obj\Debug\net6.0\ref\WeatherApp_API.Shared.dll
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.deps.json
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.dll
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.pdb
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.csproj.AssemblyReference.cache
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.AssemblyInfoInputs.cache
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.AssemblyInfo.cs
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.csproj.CoreCompileInputs.cache
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.dll
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\refint\WeatherApp_API.Shared.dll
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.pdb
+C:\Users\HP\Downloads\WeatherApp_API\WeatherApp_API\Shared\obj\Debug\net6.0\ref\WeatherApp_API.Shared.dll
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.deps.json
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.dll
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\bin\Debug\net6.0\WeatherApp_API.Shared.pdb
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.csproj.AssemblyReference.cache
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.AssemblyInfoInputs.cache
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.AssemblyInfo.cs
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.dll
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\refint\WeatherApp_API.Shared.dll
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\WeatherApp_API.Shared.pdb
+C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Shared\obj\Debug\net6.0\ref\WeatherApp_API.Shared.dll

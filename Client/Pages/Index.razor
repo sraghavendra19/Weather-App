@@ -1,0 +1,99 @@
+﻿@page "/"
+@layout EmptyLayout
+@inject NavigationManager Nav
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+
+@if (isLoggedIn)
+{
+    Nav.NavigateTo("/home");
+}
+else
+{
+    <div class="landing-page text-center">
+        <div class="overlay">
+            <div class="container py-5">
+                <h1 class="text-white fw-bold display-4">🌤️ WeatherApp</h1>
+                @* <p class="text-white fs-5 mb-4">
+                    In a world where the winds can change at a moment's notice, WeatherApp stands as your beacon of foresight. 
+                    Knowing the weather is the best armor against nature's whims.
+                </p> *@
+
+                @* <div class="row justify-content-center g-4 mb-4">
+                    @foreach (var quote in quotes)
+                    {
+                        <div class="col-md-4">
+                            <div class="card card-hover shadow-sm h-100">
+                                <div class="card-body d-flex flex-column justify-content-center">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>@quote.Text</p>
+                                        <footer class="blockquote-footer mt-2">@quote.Author</footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div> *@
+
+                <h5 class="text-white">Ready to explore the weather?</h5>
+                <h6 class="text-white mb-4">Login to get started!</h6>
+
+                <button class="btn btn-success btn-lg me-2" @onclick='() => Nav.NavigateTo("/login")'>🔐 Log In</button>
+                <button class="btn btn-outline-light btn-lg" @onclick='() => Nav.NavigateTo("/signup")'>📝 Sign Up</button>
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: url('/Back.jpg') no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .overlay {
+        background-color: rgba(0, 0, 0, 0.6);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .card-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #e3f2fd;
+        cursor: pointer;
+    }
+
+    h1, h5, h6 {
+        color: white;
+    }
+</style>
+
+@code {
+    private bool isLoggedIn = false;
+
+    private List<(string Text, string Author)> quotes = new()
+    {
+        ("If you want to see the sunshine, you have to weather the storm.", "Frank Lane"),
+        ("The Earth has a fever, and the fever is rising.", "Al Gore"),
+        ("There’s no Planet B.", "Ban Ki-moon"),
+        ("A bank is a place where they lend you an umbrella in fair weather and ask for it back when it begins to rain.", "Robert Frost"),
+        ("A change in the weather is sufficient to recreate the world and ourselves.", "Marcel Proust"),
+        ("Everyone complains about the weather, but nobody ever seems to do anything about it.", "Willard Scott")
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await LocalStorage.GetItemAsync<string>("authToken");
+        isLoggedIn = !string.IsNullOrWhiteSpace(token);
+    }
+}

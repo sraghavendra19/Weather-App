@@ -1,0 +1,119 @@
+@using WeatherApp_API.Client.Services
+@using WeatherApp_API.Shared.Models;
+@page "/login"
+@layout EmptyLayout
+
+@inject AuthService Auth
+@inject NavigationManager Nav
+
+<style>
+    body {
+        background-image: url('/Back.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-attachment: fixed;
+        margin: 0;
+        padding: 0;
+    }
+
+    .login-container {
+        max-width: 420px;
+        margin: 80px auto;
+        padding: 40px 30px;
+        background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        backdrop-filter: blur(6px);
+    }
+
+    .login-container h2 {
+        margin-bottom: 25px;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .login-container input {
+        width: 100%;
+        padding: 10px 14px;
+        margin: 12px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    .login-container button {
+        width: 100%;
+        padding: 10px 14px;
+        margin-top: 14px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-container button:hover {
+        background-color: #222;
+    }
+
+    .login-container h6 {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .login-container p {
+        margin-top: 15px;
+        color: #ff4444;
+        font-weight: 600;
+    }
+</style>
+
+<div class="login-container">
+    <h2>Log In — WeatherApp 🌤️</h2>
+
+    <input @bind="username" placeholder="Username" />
+    <input @bind="password" type="password" placeholder="Password" />
+
+    <button @onclick="LoginUser">Log In</button>
+
+    <h6>Don't have an account?</h6>
+    <button @onclick='() => Nav.NavigateTo("/signup")'>Sign Up</button>
+
+    @if (!string.IsNullOrEmpty(message))
+    {
+        <p>@message</p>
+    }
+</div>
+
+@code {
+    private string username = "";
+    private string password = "";
+    private string message = "";
+
+    private async Task LoginUser()
+    {
+        message = "";
+        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+        {
+            message = "Both fields are required.";
+            return;
+        }
+
+        var success = await Auth.Login(new UserDto { Username = username, Password = password });
+
+        if (success)
+        {
+            Nav.NavigateTo("/");
+        }
+        else
+        {
+            message = "Invalid login. Try again.";
+        }
+    }
+}

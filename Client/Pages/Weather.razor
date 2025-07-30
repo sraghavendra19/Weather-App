@@ -1,0 +1,125 @@
+@page "/weather"
+@using WeatherApp_API.Client.Services
+@using WeatherApp_API.Shared.Models
+@inject WeatherService WeatherService
+<ProtectedPage>
+<style>
+    body{
+        min-height: 100vh;
+        background-image: linear-gradient(to bottom, #b7f8db 0%, #50c9c3 100%);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    input {
+        margin-bottom: 10px;
+        width: 200px;
+        height: 37px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .weather-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 40px;
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 15px;
+        background-color: #e0f7fa;
+        border-radius: 10px;
+        font-size: 16px;
+    }
+
+    .weather-grid p {
+        margin: 0;
+        padding: 4px 0;
+    }
+
+    .weather-title {
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    .weather-icon-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .weather-icon-container img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .weather-icon-container h4 {
+        margin-bottom: 5px;
+        font-size: 18px;
+        color: #333;
+    }
+
+    .weather-icon-container p {
+        font-size: 16px;
+        color: #444;
+    }
+</style>
+
+<h3>Weather Info</h3><br
+<p>Enter a city name to get the current weather.</p><br>
+<input @bind="city" placeholder="Enter city name" />
+<button class="btn btn-primary" @onclick="FetchWeather">Get Weather</button><br /><br />
+
+@if (liveWeather != null)
+{
+    <div class="weather-title">Current Weather - @liveWeather.Name</div>
+    <div class="weather-grid">
+        <p><strong>Temp:</strong> @(liveWeather.Main != null ? $"{liveWeather.Main.Temp} °C" : "")</p>
+        <p><strong>Feels Like:</strong> @(liveWeather.Main != null ? $"{liveWeather.Main.Feels_Like} °C" : "")</p>
+
+        <p><strong>Condition:</strong> @(liveWeather.Weather?.FirstOrDefault()?.Description ?? "")</p>
+        <p><strong>Humidity:</strong> @(liveWeather.Main != null ? $"{liveWeather.Main.Humidity}%" : "")</p>
+
+        <p><strong>Wind Speed:</strong> @($"{liveWeather.Wind?.Speed} m/s")</p>
+        <p><strong>Cloudiness:</strong> @($"{liveWeather.Clouds?.All}%")</p>
+
+        <p><strong>Sunrise:</strong> @(liveWeather.Sys?.Sunrise != null ? DateTimeOffset.FromUnixTimeSeconds(liveWeather.Sys.Sunrise.Value).ToLocalTime().DateTime.ToShortTimeString() : "")</p>
+        <p><strong>Sunset:</strong> @(liveWeather.Sys?.Sunset != null ? DateTimeOffset.FromUnixTimeSeconds(liveWeather.Sys.Sunset.Value).ToLocalTime().DateTime.ToShortTimeString() : "")</p>
+    </div>
+    <div class="weather-icon-container">
+        <h4>Weather Condition Icon</h4>
+        <img src="@($"https://openweathermap.org/img/wn/{liveWeather.Weather.FirstOrDefault()?.Icon}@2x.png")" alt="Weather icon" />
+        <p>@(liveWeather.Weather?.FirstOrDefault()?.Main ?? "Unknown")</p>
+    </div>
+
+}
+
+@if (staticWeather?.Any() == true)
+{
+    <h4>5-Day Static Data:</h4>
+    <ul>
+        @foreach (var w in staticWeather)
+        {
+            <li>@w.Date.ToShortDateString(): @w.Description (@w.Temperature &deg;C)</li>
+        }
+    </ul>
+}
+</ProtectedPage>
+@code {
+    private string city = "";
+    private WeatherResponse? liveWeather;
+    private List<WeatherInfo>? staticWeather;
+
+    private async Task FetchWeather()
+    {
+        try
+        {
+            liveWeather = await WeatherService.GetLiveWeather(city);
+            staticWeather = await WeatherService.GetStaticWeather(city) ?? new();
+        }
+        catch (Exception ex)
+        {
+            liveWeather = null;
+            staticWeather = new();
+        }
+    }
+}

@@ -1,0 +1,71 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property._SupportedPlatformList = browser
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = true
+build_property.IncludeAllContentForSelfExtract = 
+build_property.RootNamespace = WeatherApp_API.Client
+build_property.RootNamespace = WeatherApp_API.Client
+build_property.ProjectDir = C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Client\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\HP\Desktop\blaz\WeatherApp_API (1)\WeatherApp_API\Client
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Pages/FavList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmF2TGlzdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Pages/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9naW4ucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Pages/SignUp.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2lnblVwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Pages/Weather.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcV2VhdGhlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Shared/EmptyLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVtcHR5TGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Shared/ProtectedPage.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFByb3RlY3RlZFBhZ2UucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-9c0d8sxdgc
+
+[C:/Users/HP/Desktop/blaz/WeatherApp_API (1)/WeatherApp_API/Client/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-tk5umft61y

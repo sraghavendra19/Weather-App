@@ -1,0 +1,25 @@
+@inject Blazored.LocalStorage.ILocalStorageService LocalStorage
+@inject NavigationManager Nav
+
+@if (isAuthenticated)
+{
+    @ChildContent
+}
+
+@code {
+    [Parameter]
+    public RenderFragment? ChildContent { get; set; }
+
+    private bool isAuthenticated = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var token = await LocalStorage.GetItemAsync<string>("authToken");
+        isAuthenticated = !string.IsNullOrWhiteSpace(token);
+
+        if (!isAuthenticated)
+        {
+            Nav.NavigateTo("/");
+        }
+    }
+}
